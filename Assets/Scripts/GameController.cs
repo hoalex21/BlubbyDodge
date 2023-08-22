@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour
         player = Instantiate(
             blub,
             new Vector3(
-                UnityEngine.Random.Range(-1.75f, 1.75f),
+                0f,
                 -3.25f,
                 -1f
             ),
@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
         obstacle1 = Instantiate(
             obstacle,
             new Vector3(
-                UnityEngine.Random.Range(-1.6f, 1.6f),
+                UnityEngine.Random.Range(-1.9f, 1.9f),
                 5 + (obstacle.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.y / 2f),
                 -1
             ),
@@ -107,7 +107,7 @@ public class GameController : MonoBehaviour
         obstacle2 = Instantiate(
             obstacle,
             new Vector3 (
-                UnityEngine.Random.Range(-1.6f, 1.6f),
+                UnityEngine.Random.Range(-1.9f, 1.9f),
                 obstacle1.transform.position.y * 2f,
                 -1
             ),
@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour
         if (obstacle1.transform.position.y < (-5 - (obstacle.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.y / 2f)))
         {
             obstacle1.transform.position = new Vector3(
-                UnityEngine.Random.Range(-1.6f, 1.6f),
+                UnityEngine.Random.Range(-1.9f, 1.9f),
                 5 + (obstacle.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.y / 2f),
                 -1
             );
@@ -133,23 +133,23 @@ public class GameController : MonoBehaviour
         if (obstacle2.transform.position.y < (-5 - (obstacle.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.y / 2f)))
         {
             obstacle2.transform.position = new Vector3(
-                UnityEngine.Random.Range(-1.6f, 1.6f),
+                UnityEngine.Random.Range(-1.9f, 1.9f),
                 5 + (obstacle.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.y / 2f),
                 -1
             );
         }
 
-        if (player.transform.position.x >= 3.1325f)
+        if (player.transform.position.x >= 3.05f)
         {
             player.transform.position = new Vector3(
-                -3.1325f,
+                -3.05f,
                 player.transform.position.y,
                 player.transform.position.z
             );
-        } else if (player.transform.position.x <= -3.1325f)
+        } else if (player.transform.position.x <= -3.05f)
         {
             player.transform.position = new Vector3(
-                3.1325f,
+                3.05f,
                 player.transform.position.y,
                 player.transform.position.z
             );
