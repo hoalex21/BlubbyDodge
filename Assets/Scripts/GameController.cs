@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Services.Core;
-using Unity.Services.Core.Environments;
-using Unity.Services.Authentication;
-using Unity.Services.CloudSave;
+using UnityEngine.Advertisements;
 using TMPro;
 
 public class GameController : MonoBehaviour
@@ -62,6 +59,8 @@ public class GameController : MonoBehaviour
 
         background = Instantiate(backgrounds[UnityEngine.Random.Range(0, 3)], new Vector2(0, 0), Quaternion.Euler(90f, 180f, 0f));
         background.transform.parent = backgroundsParent.transform;
+
+        adController.GetComponent<InterstitialAd>().LoadAd();
 
         // Set up UI
         mainMenu.SetActive(true);
@@ -221,19 +220,16 @@ public class GameController : MonoBehaviour
         playCanvas.SetActive(false);
         gameOverMenu.SetActive(true);
 
-        Debug.Log(PlayerPrefs.GetInt("PlayCount", 1));
-
-        if(PlayerPrefs.GetInt("PlayCount", 1) > 4)
+        if(PlayerPrefs.GetInt("PlayCount", 1) > 14)
         {
             try
             {
-                adController.GetComponent<InterstitialAd>().LoadAd();
                 adController.GetComponent<InterstitialAd>().ShowAd();
                 PlayerPrefs.SetInt("PlayCount", 0);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                PlayerPrefs.SetInt("PlayCount", 5);
+                PlayerPrefs.SetInt("PlayCount", PlayerPrefs.GetInt("PlayCount", 0) + 1);
             }
         }
     }
