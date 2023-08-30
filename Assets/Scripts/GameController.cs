@@ -221,17 +221,19 @@ public class GameController : MonoBehaviour
         playCanvas.SetActive(false);
         gameOverMenu.SetActive(true);
 
-        if(PlayerPrefs.GetInt("PlayCount", 1) > 8)
+        Debug.Log(PlayerPrefs.GetInt("PlayCount", 1));
+
+        if(PlayerPrefs.GetInt("PlayCount", 1) > 4)
         {
             try
             {
                 adController.GetComponent<InterstitialAd>().LoadAd();
                 adController.GetComponent<InterstitialAd>().ShowAd();
-                PlayerPrefs.SetInt("PlayCount", 1);
+                PlayerPrefs.SetInt("PlayCount", 0);
             }
             catch (Exception e)
             {
-                PlayerPrefs.SetInt("PlayCount", PlayerPrefs.GetInt("PlayCount", 1) + 1);
+                PlayerPrefs.SetInt("PlayCount", 5);
             }
         }
     }
