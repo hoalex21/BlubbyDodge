@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1") && speed > 0)
+        if((Input.GetButtonDown("Fire1") || Input.GetKeyDown("space")) && speed > 0)
         {
             AudioManager.Instance.playSoundEffect("Jump");
 
