@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Advertisements;
 using TMPro;
 
 public class GameController : MonoBehaviour
@@ -26,9 +25,6 @@ public class GameController : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text gameOverText;
     public TMP_Text highScoreText;
-
-    // Ads
-    public GameObject adController;
 
     // Instantiate
     private GameObject player;
@@ -59,8 +55,6 @@ public class GameController : MonoBehaviour
 
         background = Instantiate(backgrounds[UnityEngine.Random.Range(0, 3)], new Vector2(0, 0), Quaternion.Euler(90f, 180f, 0f));
         background.transform.parent = backgroundsParent.transform;
-
-        adController.GetComponent<InterstitialAd>().LoadAd();
 
         // Set up UI
         mainMenu.SetActive(true);
@@ -169,8 +163,6 @@ public class GameController : MonoBehaviour
         gameOverMenu.SetActive(false);
 
         Spawn();
-
-        PlayerPrefs.SetInt("PlayCount", PlayerPrefs.GetInt("PlayCount", 1) + 1);
     }
 
     public void Restart()
@@ -219,18 +211,5 @@ public class GameController : MonoBehaviour
         mainMenu.SetActive(false);
         playCanvas.SetActive(false);
         gameOverMenu.SetActive(true);
-
-        if(PlayerPrefs.GetInt("PlayCount", 1) > 14)
-        {
-            try
-            {
-                adController.GetComponent<InterstitialAd>().ShowAd();
-                PlayerPrefs.SetInt("PlayCount", 0);
-            }
-            catch(Exception e)
-            {
-                PlayerPrefs.SetInt("PlayCount", PlayerPrefs.GetInt("PlayCount", 0) + 1);
-            }
-        }
     }
 }
